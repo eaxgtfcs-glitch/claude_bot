@@ -9,11 +9,15 @@ RUN apt-get update && apt-get install -y \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Создаём непривилегированного пользователя
-# Claude Code запрещает --dangerously-skip-permissions от root
 RUN useradd -m -s /bin/bash botuser
 
-# Устанавливаем Claude Code CLI глобально (от root, чтобы было в PATH)
+# Устанавливаем Claude Code CLI глобально
 RUN npm install -g @anthropic-ai/claude-code
+
+# Кладём settings.json с разрешениями — вместо --dangerously-skip-permissions
+RUN mkdir -p /home/botuser/.claude
+COPY claude-settings.json /home/botuser/.claude/settings.json
+RUN chown -R botuser:botuser /home/botuser/.claude
 
 # Рабочая директория приложения
 WORKDIR /app

@@ -11,12 +11,9 @@ services:
       # Рабочая папка — проекты которые редактирует Claude
       - ./workspace:/app/workspace
 
-      # Логи
-      - ./logs:/app/logs
-
       # Credentials claude.ai подписки (если не используешь API ключ)
-      # Путь на хосте: ~/.claude — монтируем в домашнюю папку botuser внутри контейнера
-      - ${CLAUDE_CREDENTIALS_PATH:-~/.claude}:/home/botuser/.claude:ro
+      # Монтируем только файл credentials, не всю папку — чтобы не затереть settings.json
+      - ${CLAUDE_CREDENTIALS_PATH:-~/.claude}/.credentials.json:/home/botuser/.claude/.credentials.json:ro
 
     # Если используешь API ключ вместо подписки — credentials не нужны,
     # просто закомментируй строку выше и добавь в .env:
