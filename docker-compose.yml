@@ -1,0 +1,23 @@
+services:
+  claude-bot:
+    build: .
+    container_name: claude-telegram-bot
+    restart: unless-stopped
+
+    env_file:
+      - .env
+
+    volumes:
+      # Рабочая папка — проекты которые редактирует Claude
+      - ./workspace:/app/workspace
+
+      # Логи
+      - ./logs:/app/logs
+
+      # Credentials claude.ai подписки (если не используешь API ключ)
+      # Путь на хосте: ~/.claude — монтируем только для чтения внутрь контейнера
+      - ${CLAUDE_CREDENTIALS_PATH:-~/.claude}:/root/.claude:ro
+
+    # Если используешь API ключ вместо подписки — credentials не нужны,
+    # просто закомментируй строку выше и добавь в .env:
+    # ANTHROPIC_API_KEY=sk-ant-...
