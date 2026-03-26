@@ -52,7 +52,7 @@ scp -r /путь/к/claude_bot user@IP_СЕРВЕРА:~/claude_bot
 Или через git если проект в репозитории:
 
 ```bash
-git clone https://github.com/ВАШ_РЕПО/claude_bot.git ~/claude_bot
+git clone https://github.com/eaxgtfcs-glitch/claude_bot.git ~/claude_bot
 ```
 
 ---
@@ -88,28 +88,6 @@ chmod 600 .env
 
 Выбери один вариант.
 
-### Вариант A: API ключ — проще для сервера (рекомендую)
-
-Получи ключ на [console.anthropic.com](https://console.anthropic.com) → API Keys → Create Key.
-
-Добавь в `.env`:
-
-```
-ANTHROPIC_API_KEY=sk-ant-api03-xxxxxxxxxxxxxxxx
-```
-
-В `docker-compose.yml` закомментируй строку с credentials:
-
-```bash
-nano docker-compose.yml
-```
-
-```yaml
-# - ${CLAUDE_CREDENTIALS_PATH:-~/.claude}:/root/.claude:ro
-```
-
----
-
 ### Вариант B: подписка claude.ai (Pro/Max)
 
 Сервер headless — браузера нет, поэтому логинимся **локально**, потом копируем credentials.
@@ -124,7 +102,7 @@ claude auth login
 **Скопировать credentials на сервер:**
 
 ```bash
-scp -r ~/.claude user@IP_СЕРВЕРА:~/.claude
+scp -r ~/.claude user@81.91.177.129:~/.claude
 ```
 
 **На сервере** убедись что файл на месте:

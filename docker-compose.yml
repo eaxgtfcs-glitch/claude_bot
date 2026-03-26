@@ -15,8 +15,8 @@ services:
       - ./logs:/app/logs
 
       # Credentials claude.ai подписки (если не используешь API ключ)
-      # Путь на хосте: ~/.claude — монтируем только для чтения внутрь контейнера
-      - ${CLAUDE_CREDENTIALS_PATH:-~/.claude}:/root/.claude:ro
+      # Путь на хосте: ~/.claude — монтируем в домашнюю папку botuser внутри контейнера
+      - ${CLAUDE_CREDENTIALS_PATH:-~/.claude}:/home/botuser/.claude:ro
 
     # Если используешь API ключ вместо подписки — credentials не нужны,
     # просто закомментируй строку выше и добавь в .env:
