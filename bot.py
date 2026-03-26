@@ -24,7 +24,6 @@ logging.basicConfig(
     format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
     level=logging.INFO,
     handlers=[
-        logging.FileHandler("logs/bot.log", encoding="utf-8"),
         logging.StreamHandler(open(sys.stdout.fileno(), mode="w", encoding="utf-8", closefd=False)),
     ],
 )
@@ -100,7 +99,6 @@ async def run_claude(prompt: str, workdir: str, timeout: int = config.CLAUDE_TIM
     cmd = [
         "claude",
         "--print",               # неинтерактивный режим, вывод в stdout
-        "--dangerously-skip-permissions",  # auto-approve всех действий
         prompt,
     ]
 
